@@ -35,9 +35,11 @@ sudo systemctl restart docker
 ## **Step 3 : Build and Image locally to check whether is building or Not **
 ```bash
     docker image build -t  netflix .
-
 ```
   1. It will give you an blank Netflx page with no Images on it
+
+  ![Preview](Images/5.png)
+
   2. To solve that you have create an **API** key in <b>TMBD</b>
 ---
 ### 🔹 Step-by-Step Guide
@@ -69,17 +71,53 @@ sudo systemctl restart docker
 ```bash
 docker image build -t --build-arg  TMDB_V3_API_KEY=80be8bf15c0abc1246b10cfc43b9e8f6 -t netflix .
 ```
+ ![Preview](Images/1.png)
 ---
 
 ## **Step 4: Configure Docker Hub Credentials in Jenkins**
 1. Go to **Jenkins Dashboard** → **Manage Jenkins** → **Manage Credentials**
+![Preview](Images/2.png)
+
 2. Under **Global Credentials**, click **Add Credentials**
+![Preview](Images/3.png)
+
 3. Select **Username and Password** and enter:
    - **Username:** *Your Docker Hub username*
    - **Password:** *Your Docker Hub password*
-4. Set **ID** as `dockerhub-credentials` and save.
+4. Set **ID** as `dockerHub` and save.
+![Preview](Images/4.png)
 
 ---
+## **Step 4: Install some Plugins in Jenkins for Docker **
+
+### **Step-by-Step Guide**
+
+1. Open **Jenkins Dashboard**.
+2. Click on **Manage Jenkins**.
+3. Navigate to **Manage Plugins**.
+4. Select the **Available** tab.
+5. Use the **Search Bar** to find the required plugins one by one:
+    ![Preview](Images/6.png)
+
+   - **Docker**
+   - **Docker commons**
+   - **Docker pipeline**
+   - **DOcker API**
+   - **DOcker Build and Push**
+6. Check the box next to each plugin.
+7. Click **Install Without Restart**.
+   ![Preview](Images/7.png)
+8. Wait for the installation to complete.
+9. Restart Jenkins if required.
+
+🚀 Now, Jenkins is ready for Docker build and push operations! 🎯
+
+## **Step 5 : Add and docker tool 
+ 1. Open **Jenkins Dashboard**.
+2. Click on **Manage Jenkins**.
+3. Navigate to **tools**
+4.  Select the **Docker** tab.
+5. Click on it and install it.
 
 ## **Step 4: Create a Jenkins Pipeline (Jenkinsfile)**
 Inside your **GitHub repository**, create a file named `Jenkinsfile` with the following content:
