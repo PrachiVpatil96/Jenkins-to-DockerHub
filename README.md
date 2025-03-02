@@ -181,6 +181,7 @@ pipeline {
 Once the pipeline runs successfully:
 1. Go to **Docker Hub** → Navigate to your repository
 2. You should see the newly pushed Docker image 🎉
+   ![Preview](Images/10.png)
 
 ---
 
