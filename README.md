@@ -1,95 +1,162 @@
-<div align="center">
-  <a href="http://netflix-clone-with-tmdb-using-react-mui.vercel.app/">
-    <img src="./public/assets/netflix-logo.png" alt="Logo" width="100" height="32">
-  </a>
+# **Automated Docker Image Build & Push with Jenkins** 🚀
 
-  <h3 align="center">Netflix Clone</h3>
+## **Project Overview**
+This project sets up a **Jenkins CI/CD pipeline** to **automate the building and pushing of Docker images** to Docker Hub.
 
-  <p align="center">
-    <a href="https://netflix-clone-react-typescript.vercel.app/">View Demo</a>
-    ·
-    <a href="https://github.com/crazy-man22/netflix-clone-react-typescript/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/crazy-man22/netflix-clone-react-typescript/issues">Request Feature</a>
-  </p>
-</div>
+## **Prerequisites**
+Ensure you have the following installed on your **Jenkins server**:
 
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#prerequests">Prerequests</a>
-    </li>
-    <li>
-      <a href="#which-features-this-project-deals-with">Which features this project deals with</a>
-    </li>
-    <li><a href="#third-party-libraries-used-except-for-react-and-rtk">Third Party libraries used except for React and RTK</a></li>
-    <li>
-      <a href="#contact">Contact</a>
-    </li>
-  </ol>
-</details>
+- **Jenkins** (latest version)
+- **Docker**
+- **Git**
+- A **Docker Hub account**
+- A **GitHub repository** for the project
+- A **Nodejs-16** and Yarn 
 
-<br />
+---
 
-<div align="center">
-  <img src="./public/assets/home-page.png" alt="Logo" width="100%" height="100%">
-  <p align="center">Home Page</p>
-  <img src="./public/assets/mini-portal.png" alt="Logo" width="100%" height="100%">
-  <p align="center">Mini Portal</p>
-  <img src="./public/assets/detail-modal.png" alt="Logo" width="100%" height="100%">
-  <p align="center">Detail Modal</p>
-  <img src="./public/assets/grid-genre.png" alt="Logo" width="100%" height="100%">
-  <p align="center">Grid Genre Page</p>
-  <img src="./public/assets/watch.png" alt="Logo" width="100%" height="100%">
-  <p align="center">Watch Page with customer contol bar</p>
-</div>
-
-## Prerequests
-
-- Create an account if you don't have on [TMDB](https://www.themoviedb.org/).
-  Because I use its free API to consume movie/tv data.
-- And then follow the [documentation](https://developers.themoviedb.org/3/getting-started/introduction) to create API Key
-- Finally, if you use v3 of TMDB API, create a file named `.env`, and copy and paste the content of `.env.example`.
-  And then paste the API Key you just created.
-
-## Which features this project deal with
-
-- How to create and use [Custom Hooks](https://reactjs.org/docs/hooks-custom.html)
-- How to use [Context](https://reactjs.org/docs/context.html) and its provider
-- How to use lazy and Suspense for [Code-Splitting](https://reactjs.org/docs/code-splitting.html)
-- How to use a new [lazy](https://reactrouter.com/en/main/route/lazy) feature of react-router to reduce bundle size.
-- How to use data [loader](https://reactrouter.com/en/main/route/loader) of react-router, and how to use redux dispatch in the loader to fetch data before rendering component.
-- How to use [Portal](https://reactjs.org/docs/portals.html)
-- How to use [Fowarding Refs](https://reactjs.org/docs/forwarding-refs.html) to make components reusuable
-- How to create and use [HOC](https://reactjs.org/docs/higher-order-components.html)
-- How to customize default theme of [MUI](https://mui.com/)
-- How to use [RTK](https://redux-toolkit.js.org/introduction/getting-started)
-- How to use [RTK Query](https://redux-toolkit.js.org/rtk-query/overview)
-- How to customize default classname of [MUI](https://mui.com/material-ui/experimental-api/classname-generator)
-- Infinite Scrolling(using [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API))
-- How to make awesome carousel using [slick-carousel](https://react-slick.neostack.com)
-
-## Third Party libraries used except for React and RTK
-
-- [react-router-dom@v6.9](https://reactrouter.com/en/main)
-- [MUI(Material UI)](https://mui.com/)
-- [framer-motion](https://www.framer.com/docs/)
-- [video.js](https://videojs.com)
-- [react-slick](https://react-slick.neostack.com/)
-
-## Install with Docker
-
+## **Step 1: Install Docker on Jenkins Server**
+Run the following commands on your **Jenkins server**:
 ```sh
-docker build --build-arg TMDB_V3_API_KEY=your_api_key_here -t netflix-clone .
+sudo apt update && sudo apt install docker.io -y
+sudo usermod -aG docker jenkins  # Allow Jenkins to use Docker
+sudo systemctl restart docker
+```
+## **Step 2: Install Node js nd npm on local machine or virtual machine**
+```bash
+  curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+      sudo apt-get install -y nodejs
+      node -v
+      npm -v
+      sudo  npm install --global yarn
+     yarn install
+```
+---
+## **Step 3 : Build and Image locally to check whether is building or Not **
+```bash
+    docker image build -t  netflix .
 
-docker run --name netflix-clone-website --rm -d -p 80:80 netflix-clone
+```
+  1. It will give you an blank Netflx page with no Images on it
+  2. To solve that you have create an **API** key in <b>TMBD</b>
+---
+### 🔹 Step-by-Step Guide
+
+#### **1️⃣ Sign Up or Log In**
+1. Go to **[TMDB Website](https://www.themoviedb.org/)**.
+2. Click on **Sign Up** (if you don’t have an account) or **Log In**.
+
+#### **2️⃣ Navigate to API Section**
+1. After logging in, click on your **profile icon** (top-right corner).
+2. Select **Settings** from the dropdown.
+3. In the left sidebar, click on **API**.
+
+#### **3️⃣ Request an API Key**
+1. Click on **Create API Key**.
+2. Select the **purpose**:
+   - Personal project
+   - Commercial use
+   - Educational use
+   - Other
+3. Fill in the required details.
+4. Accept the terms and conditions.
+5. Click **Submit**.
+
+#### **4️⃣ Get Your API Key**
+- Once approved, your **API Key (v3 auth)** will be displayed.
+  Now you can build your docker image by using follwing command
+
+```bash
+docker image build -t --build-arg  TMDB_V3_API_KEY=80be8bf15c0abc1246b10cfc43b9e8f6 -t netflix .
+```
+---
+
+## **Step 4: Configure Docker Hub Credentials in Jenkins**
+1. Go to **Jenkins Dashboard** → **Manage Jenkins** → **Manage Credentials**
+2. Under **Global Credentials**, click **Add Credentials**
+3. Select **Username and Password** and enter:
+   - **Username:** *Your Docker Hub username*
+   - **Password:** *Your Docker Hub password*
+4. Set **ID** as `dockerhub-credentials` and save.
+
+---
+
+## **Step 4: Create a Jenkins Pipeline (Jenkinsfile)**
+Inside your **GitHub repository**, create a file named `Jenkinsfile` with the following content:
+
+```groovy
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = "your-dockerhub-username/your-image-name"
+        DOCKER_CREDENTIALS_ID = "dockerhub-credentials"
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/your-repo.git'  // Replace with your actual repo
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    sh "docker build -t ${DOCKER_IMAGE}:latest ."
+                }
+            }
+        }
+
+        stage('Login to Docker Hub') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                        sh "echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin"
+                    }
+                }
+            }
+        }
+
+        stage('Push Image to Docker Hub') {
+            steps {
+                script {
+                    sh "docker push ${DOCKER_IMAGE}:latest"
+                }
+            }
+        }
+    }
+}
 ```
 
-## Todo
+---
 
-- Make the animation of video card portal more similar to Netflix.
-- Improve performance. I am using `context` and `provider` but all components subscribed to the context's value are re-rendered. These re-renders happen even if the part of the value is not used in render of the component. there are [several ways](https://blog.axlight.com/posts/4-options-to-prevent-extra-rerenders-with-react-context/) to prevent the re-renders from these behaviours. In addition to them, there may be several performance issues.
-- Replace bundler([Vite](https://vitejs.dev/guide)) with [Turbopack](https://turbo.build/pack/docs/why-turbopack). Turbopack is introduced in Next.js conf recently. It's very fast but it's nor ready to use right now. it just support Next.js, and they plan to support all others as soon as possible. so if it's ready to use, replace [Vite](https://vitejs.dev/guide) with [Turbopack](https://turbo.build/pack/docs/why-turbopack).
-- Add accessibilities for better UX.
-- Add Tests.
+## **Step 5: Create a Jenkins Job**
+1. Go to **Jenkins Dashboard** → Click **New Item** → Select **Pipeline**
+2. Under **Pipeline Definition**, choose **Pipeline script from SCM**
+3. Set **SCM** to **Git** and enter your **GitHub repo URL**
+4. Click **Save**, then **Build Now**
+
+---
+
+## **Step 6: Verify the Docker Image on Docker Hub**
+Once the pipeline runs successfully:
+1. Go to **Docker Hub** → Navigate to your repository
+2. You should see the newly pushed Docker image 🎉
+
+---
+
+## **Bonus: Tagging the Image with Git Commit SHA**
+Modify the **Push Image** stage in `Jenkinsfile` to tag images with the Git commit SHA:
+
+```groovy
+sh "docker tag ${DOCKER_IMAGE}:latest ${DOCKER_IMAGE}:${GIT_COMMIT}"
+sh "docker push ${DOCKER_IMAGE}:${GIT_COMMIT}"
+```
+
+---
+
+## **Conclusion**
+This project demonstrates how to automate Docker image **builds and pushes** using **Jenkins pipelines**, improving **DevOps workflows**! 🚀
+
+Happy Learning! 😊
