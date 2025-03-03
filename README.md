@@ -25,11 +25,11 @@ sudo systemctl restart docker
 ## **Step 2: Install Node js nd npm on local machine or virtual machine**
 ```bash
   curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-      sudo apt-get install -y nodejs
-      node -v
-      npm -v
-      sudo  npm install --global yarn
-     yarn install
+  sudo apt-get install -y nodejs
+  node -v
+  npm -v
+  sudo  npm install --global yarn
+  yarn install
 ```
 ---
 ## **Step 3 : Build and Image locally to check whether is building or Not **
@@ -193,7 +193,12 @@ sh "docker tag ${DOCKER_IMAGE}:latest ${DOCKER_IMAGE}:${GIT_COMMIT}"
 sh "docker push ${DOCKER_IMAGE}:${GIT_COMMIT}"
 ```
 
----
+### To see whether the container is running or Not
+
+  1. Go to web-browser and type `http:<public-ip-address>:9000`
+  2. Youll be directed to the Website as follows
+
+  3. ![Preview](Images/14.png)
 
 ## **Conclusion**
 This project demonstrates how to automate Docker image **builds and pushes** using **Jenkins pipelines**, improving **DevOps workflows**! 🚀
